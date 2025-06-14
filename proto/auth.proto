@@ -1,0 +1,59 @@
+syntax = "proto3";
+
+package auth;
+option go_package = "services/auth";
+
+service AuthService {
+  rpc Login (LoginRequest) returns (LoginResponse);
+  rpc LoginWithOAuthGoogle (LoginWithOAuthGoogleRequest) returns (LoginWithOAuthGoogleResponse);
+  rpc LoginWithOAuthFacebook (LoginWithOAuthFacebookRequest) returns (LoginWithOAuthFacebookResponse);
+  rpc CheckEmail (CheckEmailRequest) returns (CheckEmailResponse);
+  rpc Register (RegisterRequest) returns (RegisterResponse);
+}
+
+// REQUESTS
+
+message LoginRequest {
+  string email = 1;
+  string password = 2;
+}
+
+message LoginWithOAuthGoogleRequest {
+  string token = 1;
+}
+
+message LoginWithOAuthFacebookRequest {
+  string token = 1;
+}
+
+message CheckEmailRequest {
+  string email = 1;
+}
+
+message RegisterRequest {
+  string email = 1;
+  string password = 2;
+}
+
+// RESPONSES
+
+message LoginResponse {
+  bool success = 1;
+}
+
+message LoginWithOAuthGoogleResponse {
+  bool success = 1;
+}
+
+message LoginWithOAuthFacebookResponse {
+  bool success = 1;
+}
+
+message CheckEmailResponse {
+  bool account_exists = 1;
+}
+
+message RegisterResponse {
+  bool success = 1;
+}
+
